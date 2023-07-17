@@ -4,7 +4,7 @@ class Solution {
         int minLength = Integer.MAX_VALUE;
         int count = 0;
         int first = 0;
-        long sum = 0;
+        int sum = 0;
         
         while(count != sequence.length) {
             sum += sequence[count];
