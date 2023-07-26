@@ -25,7 +25,6 @@ class Solution {
                 j = 0;
                 for (int x = 0; x < aHalfLength; x++) {
                     quadArrs[0][i][j] = arr[y][x];
-                    
                     quadArrs[2][i][j] = arr[y + aHalfLength][x];
                     j++;
                 }
