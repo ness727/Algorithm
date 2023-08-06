@@ -9,87 +9,85 @@ public class Main {
         int n = sc.nextInt();
         sc.nextLine();
         String[] input = new String[n];
-        String[][] treeArr = new String[n][3];
+        String[][] NodeArr = new String[n][3];
         char root;
-        HashMap<Character, Tree> treeMap = new HashMap<>();
+        HashMap<Character, Node> NodeMap = new HashMap<>();
 
         for (int i = 0; i < n; i++) {
             input[i] = sc.nextLine();
-            treeArr[i] = input[i].split(" ");
-            treeMap.put(treeArr[i][0].charAt(0), new Tree(treeArr[i][0].charAt(0)));
+            NodeArr[i] = input[i].split(" ");
+            NodeMap.put(NodeArr[i][0].charAt(0), new Node(NodeArr[i][0].charAt(0)));
         }
-        root = treeArr[0][0].charAt(0);
+        root = NodeArr[0][0].charAt(0);
 
         for (int i = 0; i < n; i++) {
-            Tree currentTree = treeMap.get(treeArr[i][0].charAt(0));
-            char left = treeArr[i][1].charAt(0);
-            char right = treeArr[i][2].charAt(0);
+            Node currentNode = NodeMap.get(NodeArr[i][0].charAt(0));
+            char left = NodeArr[i][1].charAt(0);
+            char right = NodeArr[i][2].charAt(0);
 
-            if (left != '.') currentTree.setLeft(treeMap.get(left));
-            if (right != '.') currentTree.setRight(treeMap.get(right));
+            if (left != '.') currentNode.setLeft(NodeMap.get(left));
+            if (right != '.') currentNode.setRight(NodeMap.get(right));
         }
 
         // 전위 순회
-        result.append(treeMap.get(root).getValue());
-        doPreorder(treeMap.get(root));
+        result.append(NodeMap.get(root).getValue());
+        doPreorder(NodeMap.get(root));
         System.out.println(result.toString());
         result.setLength(0);
 
         // 중위 순회
-        doInorder(treeMap.get(root));
+        doInorder(NodeMap.get(root));
         System.out.println(result.toString());
         result.setLength(0);
 
         // 후위 순회
-        result.append(treeMap.get(root).getValue());
-        doPostorder(treeMap.get(root));
+        result.append(NodeMap.get(root).getValue());
+        doPostorder(NodeMap.get(root));
         System.out.println(result.reverse().toString());
     }
 
-    public static void doPreorder(Tree tree) {
-        if (tree.getLeft() != null) {
-            result.append(tree.getLeft().getValue());
-            doPreorder(tree.getLeft());
+    public static void doPreorder(Node Node) {
+        if (Node.getLeft() != null) {
+            result.append(Node.getLeft().getValue());
+            doPreorder(Node.getLeft());
         }
-        if (tree.getRight() != null) {
-            result.append(tree.getRight().getValue());
-            doPreorder(tree.getRight());
+        if (Node.getRight() != null) {
+            result.append(Node.getRight().getValue());
+            doPreorder(Node.getRight());
         }
     }
-    
-    public static void doInorder(Tree tree) {
-        if (tree.getLeft() != null) doInorder(tree.getLeft());
-        result.append(tree.getValue());
-        if (tree.getRight() != null) doInorder(tree.getRight());
+    public static void doInorder(Node Node) {
+        if (Node.getLeft() != null) doInorder(Node.getLeft());
+        result.append(Node.getValue());
+        if (Node.getRight() != null) doInorder(Node.getRight());
     }
-    
-    public static void doPostorder(Tree tree) {
-        if (tree.getRight() != null) {
-            result.append(tree.getRight().getValue());
-            doPostorder(tree.getRight());
+    public static void doPostorder(Node Node) {
+        if (Node.getRight() != null) {
+            result.append(Node.getRight().getValue());
+            doPostorder(Node.getRight());
         }
-        if (tree.getLeft() != null) {
-            result.append(tree.getLeft().getValue());
-            doPostorder(tree.getLeft());
+        if (Node.getLeft() != null) {
+            result.append(Node.getLeft().getValue());
+            doPostorder(Node.getLeft());
         }
     }
 }
-class Tree {
+class Node {
     private final char value;
-    private Tree left;
-    private Tree right;
+    private Node left;
+    private Node right;
 
-    public Tree(char value) {
+    public Node(char value) {
         left = null;
         right = null;
         this.value = value;
     }
 
-    public void setLeft(Tree left) {
+    public void setLeft(Node left) {
         this.left = left;
     }
 
-    public void setRight(Tree right) {
+    public void setRight(Node right) {
         this.right = right;
     }
 
@@ -97,11 +95,11 @@ class Tree {
         return value;
     }
 
-    public Tree getLeft() {
+    public Node getLeft() {
         return left;
     }
 
-    public Tree getRight() {
+    public Node getRight() {
         return right;
     }
 }
