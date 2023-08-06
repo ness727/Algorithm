@@ -21,6 +21,6 @@ class Solution {
         }
         nSet.retainAll(mSet);
         
-        return new int[] { Collections.max(nSet), n / Collections.max(nSet) * m};
+        return new int[] { Collections.max(nSet), n * m / Collections.max(nSet)};
     }
 }
