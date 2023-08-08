@@ -11,7 +11,7 @@ class Solution {
                         return new int[] { j % n + 1, i / n + 1 };
                 
                 if (!wordList.contains(words[j])) wordList.add(words[j]);
-                else return new int[] { j % n + 1, (int)Math.floor((double)i / n) + 1 };
+                else return new int[] { j % n + 1, i / n + 1 };
             }
         }
         return new int[] { 0, 0 };
