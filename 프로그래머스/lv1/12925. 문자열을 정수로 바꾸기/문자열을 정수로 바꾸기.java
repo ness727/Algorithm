@@ -1,5 +1,5 @@
 class Solution {
     public int solution(String s) {
-        return Integer.valueOf(s);
+        return Integer.parseInt(s);
     }
 }
