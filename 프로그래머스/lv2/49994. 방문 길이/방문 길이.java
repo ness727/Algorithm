@@ -5,9 +5,7 @@ class Solution {
     StringBuilder curPosBuilder = new StringBuilder().append("0505");
     
     public int solution(String dirs) {
-        char[] dirArr = dirs.toCharArray();
-        
-        for (char c : dirArr) {
+        for (char c : dirs.toCharArray()) {
             String pos = curPosBuilder.toString();
             switch (c) {
                 case 'U':
