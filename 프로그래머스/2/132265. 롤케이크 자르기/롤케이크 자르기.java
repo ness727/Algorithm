@@ -24,13 +24,12 @@ class Solution {
             if (toppingMap.get(topping[i]).size() == 1) {
                 rightSet.remove(topping[i]);
                 leftSet.add(topping[i]);
-                if (leftSet.size() == rightSet.size()) answer++;
             }
             else {
                 toppingMap.get(topping[i]).poll();
                 leftSet.add(topping[i]);
-                if (leftSet.size() == rightSet.size()) answer++;
             }
+            if (leftSet.size() == rightSet.size()) answer++;
         }
         
         return answer;
