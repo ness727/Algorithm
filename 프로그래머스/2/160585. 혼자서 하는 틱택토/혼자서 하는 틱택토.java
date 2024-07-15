@@ -14,7 +14,7 @@ class Solution {
         return 0;
     }
     
-    // X가 O보다 많거나 둘의 개수 차이가 2 이상일 때
+    // O, X 카운트
     private int[] getCount(String[] board) {
         int[] count = new int[2];
         
