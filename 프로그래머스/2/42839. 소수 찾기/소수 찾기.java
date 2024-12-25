@@ -1,45 +1,37 @@
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 
 class Solution {
-    private ArrayList<String> nums = new ArrayList<>();
-    private HashSet<Integer> result = new HashSet<>();
-    private int num_len;
-    
     public int solution(String numbers) {
         int answer = 0;
-        num_len = numbers.length();
+        HashSet<Integer> numSet = new HashSet<>();
         
-        for (int i = 0; i < num_len; i++)
-            nums.add(numbers.substring(i, i + 1));
-        for (String strNum : nums)
-            result.add(Integer.valueOf(strNum));
+        // 초기 숫자 추가
+        for (String num : numbers.split("")) numSet.add(Integer.parseInt(num));
         
-        for (int i = 0; i < numbers.length(); i++) find(Set.of(i), nums.get(i));
+        // 모든 가능한 숫자 조합 구하기
+        findAll("", numbers, numSet);
         
-        for (Integer num : result) answer += isPrime(num);
+        // 소수 확인하기
+        for (Integer num : numSet) answer += isPrime(num);
         
         return answer;
     }
     
-    private void find(Set<Integer> paramIndexes, String num) {
-        for (int i = 0; i < nums.size(); i++) {
-            HashSet<Integer> indexes = new HashSet<>();
-            indexes.addAll(paramIndexes);
-            if (indexes.contains(i)) continue;
-            
-            String strNum = num + nums.get(i);
-            result.add(Integer.valueOf(strNum));
-            indexes.add(i);
-            if (strNum.length() < num_len) find(indexes, strNum);
+    private void findAll(String pre, String numStr, HashSet<Integer> numSet) {
+        if (numStr.length() != 0) {
+            for (int i = 0; i < numStr.length(); i++) {
+                String newNum = pre + numStr.charAt(i);
+                numSet.add(Integer.parseInt(newNum));
+                findAll(newNum, new StringBuilder(numStr).delete(i, i + 1).toString(), numSet);
+            }
         }
     }
     
-    private static int isPrime(int num) {
+    private int isPrime(int num) {
+        if (num == 0 || num == 1) return 0;
         for (int i = 2; i <= Math.sqrt(num); i++) {
             if (num % i == 0) return 0;
         }
-        return (num > 1) ? 1 : 0;
+        return 1;
     }
 }
